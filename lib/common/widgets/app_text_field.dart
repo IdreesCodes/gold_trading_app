@@ -74,7 +74,7 @@ class AppTextFormField extends StatefulWidget {
     this.fontWeight,
     this.textInputType,
     this.multiLine = false,
-    this.borderRadius = 10,
+    this.borderRadius = 7,
     this.inputFormatters,
   }) : super(key: key);
 
@@ -161,7 +161,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                     readOnly: widget.readOnly,
                     decoration: InputDecoration(
                       filled: widget.backgroundColor != null ? true : false,
-                      fillColor: widget.backgroundColor ?? Colors.transparent,
+                      fillColor: widget.backgroundColor ?? Colors.grey.shade50,
                       contentPadding: const EdgeInsets.all(15),
                       isDense: true,
                       prefixIcon: widget.prefixIcon,
@@ -190,7 +190,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
                         borderRadius: BorderRadius.circular(widget.borderRadius),
                         borderSide: BorderSide(
                           width: 1,
-                          color: widget.borderColor ?? ColorConstants.black,
+                          color: widget.borderColor ?? Colors.grey.shade50,
                         ),
                       ),
                     ),

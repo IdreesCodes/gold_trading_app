@@ -27,7 +27,9 @@ class _BlogsWidgetState extends State<BlogsWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset('assets/images/blogs.png'),
+          SizedBox(
+              width: double.infinity,
+              child: Image.asset('assets/images/blogs.png',fit: BoxFit.cover,)),
           const SizedBox(
             height: 20,
           ),
@@ -57,12 +59,15 @@ class _BlogsWidgetState extends State<BlogsWidget> {
             children: [
               Container(
                 height: 30,
-                width: 80,
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffECFDF3)
                 ),
-                child: Center(child: Text('Gold Price',style: AppConstants.description.copyWith(color: const Color(0xff027A48)),)),
+                child: Center(child: Text('  Gold Price  ',style: AppConstants.description.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xff027A48)),)),
 
               ),
               const SizedBox(
@@ -70,12 +75,15 @@ class _BlogsWidgetState extends State<BlogsWidget> {
               ),
               Container(
                 height: 30,
-                width: 80,
+
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffFDF2FA)
                 ),
-                child: Center(child: Text('Gold Stocks',style: AppConstants.description.copyWith(color: const Color(0xffC11574)),)),
+                child: Center(child: Text('  Gold stocks  ',style: AppConstants.description.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: const Color(0xffC11574)),)),
 
               ),
             ],

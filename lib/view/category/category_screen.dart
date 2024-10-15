@@ -1,6 +1,9 @@
+import 'package:fine_gold_flutter/common/widgets/app_text_field.dart';
 import 'package:fine_gold_flutter/common/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+import '../../utils/color_constants.dart';
 import '../homescreen/widgets/top_products_widget.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -11,6 +14,13 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  int selectedIndex = 0;
+  List<String> titleList=[
+    'All',
+    'Gold bars',
+    'Gold Coins',
+
+  ];
   List<String> images = [
 
     "assets/images/gold.png"  ,
@@ -34,34 +44,82 @@ class _CategoryScreenState extends State<CategoryScreen> {
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
         title: 'Search',
-        actionButton: const [
-          Padding(
+        actionButton:  [
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
             child: Icon(CupertinoIcons.search),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-            child: Icon(CupertinoIcons.search),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Image.asset('assets/images/filter.png',height: 22,width: 22,),
           )
         ],
       ),
-      body: Container(
+      body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: GridView.builder(
-            itemCount: images.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.0,
-              childAspectRatio: 0.78,
-              mainAxisSpacing: 20.0,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return TopProductsWidget(
-                image: images[index],
-                price: r'$120',
-                desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
-              );
-            },
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: List.generate(3, (index) {
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    child: Container(
+
+                      margin: const EdgeInsets.symmetric(horizontal: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      height: 40,
+
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color:  selectedIndex == index ?ColorConstants.primary: Colors.grey.shade100,
+                      ),
+                      child: Center(
+                        child: Text(
+                          titleList[index],
+                          style: selectedIndex == index? AppConstants.descriptionWhite: AppConstants.description,
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              AbsorbPointer(
+                child: AppTextFormField(
+                  suffixIcon: const Icon(Icons.expand_more,size: 24,),
+                  hintText: "Sub Categories",
+                  backgroundColor: Colors.grey.shade100,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: images.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.75,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 15.0,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return TopProductsWidget(
+                      image: images[index],
+                      price: r'$120',
+                      desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
+                    );
+                  },
+                ),
+              ),
+            ],
           )),
     );
   }

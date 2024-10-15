@@ -6,46 +6,55 @@ class AppConstants {
   static const appName = 'fine_gold';
 
   static TextStyle primaryColorHeading=TextStyle(
+    fontFamily: "inter",
       fontSize: 16,
       color: ColorConstants.primary,
       fontWeight: FontWeight.w500
   );
   static TextStyle primaryColorDescription=TextStyle(
+      fontFamily: "inter",
       fontSize: 16,
       color: ColorConstants.primary,
       fontWeight: FontWeight.w400
   );
   static TextStyle headingNormal = const TextStyle(
+    fontFamily: "inter",
     fontSize: 18,
     fontWeight: FontWeight.w500,
   );
   static TextStyle headingBold = const TextStyle(
+    fontFamily: "inter",
     fontSize: 18,
     color:ColorConstants.black,
     fontWeight: FontWeight.w600,
   );
   static TextStyle description = const TextStyle(
+    fontFamily: "inter",
     fontSize: 16,
     color:ColorConstants.black,
     fontWeight: FontWeight.w400,
 
   );
   static TextStyle descriptionWhite = const TextStyle(
+    fontFamily: "inter",
     fontSize: 14,
     color:ColorConstants.white,
     fontWeight: FontWeight.w400,
 
   );
   static TextStyle descriptionBold = const TextStyle(
+    fontFamily: "inter",
     fontSize: 14,
     fontWeight: FontWeight.w600,
   );
 
   static TextStyle heading3 = const TextStyle(
+    fontFamily: "inter",
     fontSize: 13,
     fontWeight: FontWeight.w400,
   );
   static TextStyle heading1_with_gray_color = const TextStyle(
+    fontFamily: "inter",
     fontSize: 13,
     color: Colors.grey,
     fontWeight: FontWeight.w400,

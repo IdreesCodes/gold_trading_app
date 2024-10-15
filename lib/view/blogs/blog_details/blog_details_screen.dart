@@ -36,7 +36,9 @@ class _BlogDetailsScreenState extends State<BlogDetailsScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('18 Jan 2022', style: AppConstants.primaryColorDescription,),
+                    Text('18 Jan 2022 .10 min read', style: AppConstants.primaryColorDescription.copyWith(
+                      fontWeight: FontWeight.w600
+                    ),),
                     const SizedBox(
                       height: 5,
                     ),
@@ -54,6 +56,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper matti
                     const SizedBox(
                       height: 10,
                     ),
+
                     Divider(
 
                       color: Colors.grey.shade100,

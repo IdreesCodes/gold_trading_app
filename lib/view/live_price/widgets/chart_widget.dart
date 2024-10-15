@@ -20,10 +20,10 @@ class _ChartWidgetState extends State<ChartWidget> {
         gridLineLabelPrecision: 1,
         gridLinesEnable: true,
         lineColor: ColorConstants.primary,
-        fillColor: ColorConstants.primary.withOpacity(0.32),
+        fillColor: ColorConstants.primary.withOpacity(0.15),
         fillMode: FillMode.below,
         data: data,
-        lineWidth: 2,
+        lineWidth: 2.6,
         gridLineAmount: 3,
         xLabels: const ['April', 'May', 'Jun', 'July', 'Aug','Sep','Oct' ],
         xLabelsStyle: const TextStyle(

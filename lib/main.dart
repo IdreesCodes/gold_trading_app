@@ -1,6 +1,9 @@
 import 'package:fine_gold_flutter/view/blogs/blog_details/blog_details_screen.dart';
 import 'package:fine_gold_flutter/view/blogs/blog_screen.dart';
+import 'package:fine_gold_flutter/view/blogs/blogs_widget.dart';
 import 'package:fine_gold_flutter/view/category/category_screen.dart';
+import 'package:fine_gold_flutter/view/category/category_sub_page/category_sub_page_screen.dart';
+import 'package:fine_gold_flutter/view/dashboard/bottom_nav_bar.dart';
 import 'package:fine_gold_flutter/view/homescreen/home_screen.dart';
 import 'package:fine_gold_flutter/view/items/item_details/item_detail_screen.dart';
 import 'package:fine_gold_flutter/view/live_price/live_price_screen.dart';
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const CategoryScreen(),
+      home:  const BottomNavBar(),
     );
   }
 }

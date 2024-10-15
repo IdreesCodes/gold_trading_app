@@ -14,8 +14,9 @@ class NewArrivalWidget extends StatefulWidget {
 class _NewArrivalWidgetState extends State<NewArrivalWidget> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return  Container(
-      height:130 ,
 
       width: double.infinity,
       decoration: BoxDecoration(
@@ -27,8 +28,7 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SizedBox(
-              height: 140,
-              width: 120,
+            width: screenHeight *0.12,
               child:  Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -49,7 +49,7 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
           ),
            Expanded(
              child: Padding(
-               padding: const EdgeInsets.only(top: 12.0,left: 2),
+               padding: const EdgeInsets.only(top: 0.0,left: 2),
                child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
                       fontSize: 15
                   ),),
                   const SizedBox(
-                    height: 7,
+                    height: 5,
                   ),
                   Text(widget.price,style: AppConstants.primaryColorDescription.copyWith(
                       fontSize: 15,

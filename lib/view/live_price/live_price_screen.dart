@@ -26,7 +26,7 @@ class _LivePricesScreenState extends State<LivePricesScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Live Price',
+       fineGoldAppBar: true,
       ),
       body:  Padding(
         padding: const EdgeInsets.all(12.0),

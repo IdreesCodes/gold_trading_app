@@ -59,7 +59,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
                   enableInfiniteScroll: true,
                   reverse: false,
                   autoPlay: widget.autoPlay,
-                  autoPlayInterval: const Duration(seconds: 2),
+                  autoPlayInterval: const Duration(seconds: 3),
                   autoPlayAnimationDuration: const Duration(milliseconds: 800),
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enlargeCenterPage: false,

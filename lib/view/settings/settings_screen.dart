@@ -1,5 +1,5 @@
 import 'package:fine_gold_flutter/common/widgets/custom_app_bar.dart';
-import 'package:fine_gold_flutter/view/settings/settings_widget.dart';
+import 'package:fine_gold_flutter/view/settings/widgets/settings_widget.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        title: 'Settings',
+        fineGoldAppBar: true,
       ),
       body: const Padding(
         padding: EdgeInsets.all(12.0),

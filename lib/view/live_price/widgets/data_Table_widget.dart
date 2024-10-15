@@ -1,3 +1,4 @@
+import 'package:fine_gold_flutter/utils/app_constants.dart';
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -18,15 +19,21 @@ class _DataTableWidgetState extends State<DataTableWidget> {
         border: TableBorder.all(
           width: 1.0,
           color:ColorConstants.primary.withOpacity(0.8),
-          borderRadius: BorderRadius.circular(10)
+          borderRadius: BorderRadius.circular(5)
 
         ),
         clipBehavior: Clip.hardEdge,
         headingRowColor: MaterialStateProperty.all(ColorConstants.secondary),
-        columns: const [
-          DataColumn(label: Text('Quantity')),
-          DataColumn(label: Text('Buy')),
-          DataColumn(label: Text('Sell')),
+        columns:  [
+          DataColumn(label: Text('Quantity', style: AppConstants.headingNormal.copyWith(
+            fontSize: 16
+          ),)),
+          DataColumn(label: Text('Buy',style: AppConstants.headingNormal.copyWith(
+          fontSize: 16
+          ),)),
+          DataColumn(label: Text('Sell',style: AppConstants.headingNormal.copyWith(
+              fontSize: 16
+          ),)),
         ],
         rows: const [
           DataRow(cells: [
