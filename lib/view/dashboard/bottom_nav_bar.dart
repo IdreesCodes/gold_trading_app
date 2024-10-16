@@ -5,6 +5,7 @@ import 'package:fine_gold_flutter/view/live_price/live_price_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../category/category_screen.dart';
+import '../category/category_sub_page/category_sub_page_screen.dart';
 import '../homescreen/home_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomeScreen(),
     const LivePricesScreen(),
     Container(),
-    const CategoryScreen(),
+    const CategorySubPageScreen(),
     const BlogScreen(),
   ];
 
@@ -75,7 +76,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset("assets/images/messages.png",height: 40,width: 40,),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text('Blogs',style: TextStyle(
@@ -87,7 +88,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         )
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Expanded(
@@ -105,7 +106,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Image.asset("assets/images/settings-01.png",height: 40,width: 40,),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text('Settings',style: TextStyle(
@@ -181,17 +182,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/images/category.png',
-              width: 24, height: 24,
-            ),
-            activeIcon: Image.asset(
-              'assets/images/category_active.png',
-              width: 24, height: 24,
-            ),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Image.asset(
               'assets/images/cart.png',
               width: 24, height: 24,
             ),
@@ -200,6 +190,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
               width: 24, height: 24,
             ),
             label: 'Categories',
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              'assets/images/category.png',
+              width: 24, height: 24,
+            ),
+            activeIcon: Image.asset(
+              'assets/images/category_active.png',
+              width: 24, height: 24,
+            ),
+            label: 'Cart',
           ),
         ],
       ),

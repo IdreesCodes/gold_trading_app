@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> titleList = ['Gold', 'Silver', 'Platinum', 'Palladium'];
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
+
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: const Color(0xff2b2b2b),
