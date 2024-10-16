@@ -2,6 +2,7 @@ import 'package:fine_gold_flutter/utils/app_constants.dart';
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fine_gold_flutter/view/blogs/blog_screen.dart';
 import 'package:fine_gold_flutter/view/live_price/live_price_screen.dart';
+import 'package:fine_gold_flutter/view/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../category/category_screen.dart';
@@ -34,7 +35,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
       });
     }
   }
-
   void _showBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -62,60 +62,73 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 Row(
                   children: [
                     Expanded(
-                      child: Container(
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const BlogScreen()));
 
-                        height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          border: Border.all(
-                            color: Colors.grey.shade200
+                        },
+                        child: Container(
+
+
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            border: Border.all(
+                              color: Colors.grey.shade200
+                            )
+                          ),
+                          child: Center(
+                            child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/images/messages.png",height: 40,width: 40,),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Blogs',style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey.shade700
+                                ),)
+                              ],
+                            ),
                           )
                         ),
-                        child: Center(
-                          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/images/messages.png",height: 40,width: 40,),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text('Blogs',style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey.shade700
-                              ),)
-                            ],
-                          ),
-                        )
                       ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                      child: Container(
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
 
-                        height: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7),
-                          border: Border.all(
-                            color: Colors.grey.shade200
+                        },
+                        child: Container(
+
+                          height: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            border: Border.all(
+                              color: Colors.grey.shade200
+                            )
+                          ),
+                          child: Center(
+                            child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset("assets/images/settings-01.png",height: 40,width: 40,),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Settings',style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey.shade700
+                                ),)
+                              ],
+                            ),
                           )
                         ),
-                        child: Center(
-                          child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset("assets/images/settings-01.png",height: 40,width: 40,),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text('Settings',style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey.shade700
-                              ),)
-                            ],
-                          ),
-                        )
                       ),
                     )
                   ],

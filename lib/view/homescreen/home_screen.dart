@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../../utils/app_constants.dart';
+import '../category/category_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -91,16 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            height: 35,
-                            width: 35,
-                            decoration: BoxDecoration(
-                                color: const Color(0xff3a3a3a),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const Icon(
-                              Icons.search,
-                              size: 20,
-                              color: Colors.white,
+                          GestureDetector(
+                            onTap: (){
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategorySearchScreen()));
+                            },
+                            child: Container(
+                              height: 35,
+                              width: 35,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff3a3a3a),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: const Icon(
+                                Icons.search,
+                                size: 20,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ],

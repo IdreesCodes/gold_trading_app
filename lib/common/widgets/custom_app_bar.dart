@@ -3,12 +3,13 @@
 import 'package:flutter/material.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/color_constants.dart';
+import '../../view/category/category_screen.dart';
 import '../../view/homescreen/widgets/drop_down_widget.dart';
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
    CustomAppBar({
-    Key? key,
+    super.key,
      this.title='',
      this.backGroundColor,
      this.fineGoldAppBar,
@@ -17,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
      this.bottom,
      this.height,
      this.leading,
-  }) : super(key: key);
+  });
    String title;
   final bool home;
   Color? backGroundColor;
@@ -56,16 +57,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Container(
-                  height: 35,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                      color: const Color(0xffF2F2F2),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: const Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.black,
+                GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CategorySearchScreen()));
+                  },
+                  child: Container(
+                    height: 35,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    decoration: BoxDecoration(
+                        color: const Color(0xffF2F2F2),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: const Icon(
+                      Icons.search,
+                      size: 20,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ],

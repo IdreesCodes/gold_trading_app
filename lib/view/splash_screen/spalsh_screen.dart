@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:fine_gold_flutter/view/dashboard/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import '../../utils/color_constants.dart';
 
@@ -119,29 +122,55 @@ class ExpandingCircleClipper extends CustomClipper<Rect> {
   }
 }
 class SplashScreen extends StatelessWidget {
-
   const SplashScreen({super.key});
 
+  @override
   Widget build(BuildContext context) {
+    // Start the timer to navigate after 2 seconds
+    Timer(const Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const BottomNavBar(), // Replace with your actual next screen
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+          transitionDuration: const Duration(milliseconds: 300),
+        ),
+      );
+    });
+
     return Scaffold(
       body: Container(
-        decoration:  BoxDecoration(
+        width: double.infinity,
+        decoration: BoxDecoration(
+
           gradient: LinearGradient(
-              colors: [
-                ColorConstants.primary.withOpacity(0.3),
-                ColorConstants.primary.withOpacity(0.5),
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              tileMode: TileMode.decal
+            colors: [
+              ColorConstants.primary.withOpacity(0.3),
+              ColorConstants.primary.withOpacity(0.5),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            tileMode: TileMode.decal,
           ),
         ),
-        child: Center(
-          child: Image.asset(
-            'assets/images/app_icon.png',
-            width: 150,
-            height: 150,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Image.asset(
+              'assets/images/app_icon.png',
+              width: 180,
+              height: 180,
+            ),
+            const SizedBox(height: 40),
+             CircularProgressIndicator(
+              color: ColorConstants.primary,
+            ),
+          ],
         ),
       ),
     );

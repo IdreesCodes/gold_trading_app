@@ -7,16 +7,17 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/color_constants.dart';
 import '../homescreen/widgets/top_products_widget.dart';
+import '../items/item_details/item_detail_screen.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class CategorySearchScreen extends StatefulWidget {
+  const CategorySearchScreen({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<CategorySearchScreen> createState() => _CategorySearchScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
-  void _showBottomSheet() {
+class _CategorySearchScreenState extends State<CategorySearchScreen> {
+  void filtersBottomSheet() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: false,
@@ -106,7 +107,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       fontSize: 18,
                       fontWeight: FontWeight.w400
                   ),),
-                  StockStatusWidget(),
+                  const StockStatusWidget(),
               const SizedBox(
                 height: 19,
               ),
@@ -169,7 +170,128 @@ class _CategoryScreenState extends State<CategoryScreen> {
       },
     );
   }
-  SfRangeValues _values = SfRangeValues(40.0, 80.0);
+  void categoriesBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: false,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+
+            color: Colors.white,
+            child:  Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text('Gold Bars',style: AppConstants.headingBold.copyWith(
+                      fontSize: 22
+                  ),),
+
+                  const SizedBox(
+                    height: 19,
+                  ),
+
+
+
+
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),
+                      hintText: "All",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),
+
+                      hintText: "1 gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),
+                      hintText: "5 gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),
+                      hintText: "10 gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ), AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                          fontWeight: FontWeight.w500
+                      ),
+                      hintText: "50 gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+              AbsorbPointer(
+                child: AppTextFormField(
+                  hintTextStyle: const TextStyle(
+                      fontWeight: FontWeight.w500
+                  ),
+                  hintText: "100 gram gold bar",
+                  backgroundColor: Colors.grey.shade100,
+                ),
+              ),
+              const SizedBox(
+                height: 10,),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                        fontWeight: FontWeight.w500
+                      ),
+                      hintText: "1 kilo gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,),
+
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+  SfRangeValues _values = const SfRangeValues(40.0, 80.0);
 
 
 
@@ -209,7 +331,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: Icon(CupertinoIcons.search),
           ),
           GestureDetector(
-            onTap: _showBottomSheet,
+            onTap: filtersBottomSheet,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Image.asset('assets/images/filter.png',height: 22,width: 22,),
@@ -253,11 +375,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
               const SizedBox(
                 height: 20,
               ),
-              AbsorbPointer(
-                child: AppTextFormField(
-                  suffixIcon: const Icon(Icons.expand_more,size: 24,),
-                  hintText: "Sub Categories",
-                  backgroundColor: Colors.grey.shade100,
+              GestureDetector(
+                onTap: (){
+
+                    categoriesBottomSheet();
+
+                },
+                child: AbsorbPointer(
+                  child: AppTextFormField(
+                    suffixIcon: const Icon(Icons.expand_more,size: 24,),
+                    hintText: "Sub Categories",
+                    backgroundColor: Colors.grey.shade100,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -273,10 +402,15 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     mainAxisSpacing: 15.0,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    return TopProductsWidget(
-                      image: images[index],
-                      price: r'$120',
-                      desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
+                    return GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ItemDetailScreen()));
+                      },
+                      child: TopProductsWidget(
+                        image: images[index],
+                        price: r'$120',
+                        desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
+                      ),
                     );
                   },
                 ),

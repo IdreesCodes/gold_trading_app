@@ -27,7 +27,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
-        fineGoldAppBar: true,
+        title: 'Details',
       ),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
