@@ -37,19 +37,37 @@ class _DataTableWidgetState extends State<DataTableWidget> {
         ],
         rows: const [
           DataRow(cells: [
-            DataCell(Text('Spot')),
-            DataCell(Text('1400')),
-            DataCell(Text('1500')),
+            DataCell(Text('Spot',style: TextStyle(
+              color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$1400',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$1500',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
           ]),
           DataRow(cells: [
-            DataCell(Text('Ounce')),
-            DataCell(Text('1400')),
-            DataCell(Text('1500')),
+            DataCell(Text('Ounce',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$1400',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$1500',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
           ]),
           DataRow(cells: [
-            DataCell(Text('Kilo')),
-            DataCell(Text('400')),
-            DataCell(Text('1500')),
+            DataCell(Text('Kilo',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$400',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
+            DataCell(Text(r'$1500',style: TextStyle(
+                color: Color(0xff686868)
+            ),)),
           ]),
         ],
       ),

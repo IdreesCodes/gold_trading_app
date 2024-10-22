@@ -33,7 +33,9 @@ class _BlogsWidgetState extends State<BlogsWidget> {
           const SizedBox(
             height: 20,
           ),
-          Text('18 Jan 2022', style: AppConstants.primaryColorDescription,),
+          Text('18 Jan 2022', style: AppConstants.primaryColorHeading.copyWith(
+            fontWeight: FontWeight.w700
+          ),),
           const SizedBox(
             height: 5,
           ),
@@ -65,7 +67,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                     color: const Color(0xffECFDF3)
                 ),
                 child: Center(child: Text('  Gold Price  ',style: AppConstants.description.copyWith(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xff027A48)),)),
 
@@ -81,7 +83,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                     color: const Color(0xffFDF2FA)
                 ),
                 child: Center(child: Text('  Gold stocks  ',style: AppConstants.description.copyWith(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.w500,
                     color: const Color(0xffC11574)),)),
 

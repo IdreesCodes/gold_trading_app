@@ -1,4 +1,5 @@
 import 'package:fine_gold_flutter/common/widgets/app_button.dart';
+import 'package:fine_gold_flutter/common/widgets/custom_app_bar.dart';
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/categories_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/drop_down_widget.dart';
@@ -58,63 +59,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      appBar: CustomAppBar(
+        fineGoldAppBar: true,
+        whiteLogo: true,
+      ),
         backgroundColor: const Color(0xff2b2b2b),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/images/fine_gold_bullion_white.png',
-                      height: 70,
-                      width: 110,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            height: 35,
 
-                            decoration: BoxDecoration(
-                                color: const Color(0xff3a3a3a),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: const DropDownWidget(),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategorySearchScreen()));
-                            },
-                            child: Container(
-                              height: 35,
-                              width: 35,
-                              decoration: BoxDecoration(
-                                  color: const Color(0xff3a3a3a),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Icon(
-                                Icons.search,
-                                size: 20,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+
               Container(
                 width: double.infinity,
                 decoration: const BoxDecoration(

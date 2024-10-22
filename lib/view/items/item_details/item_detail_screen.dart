@@ -24,6 +24,8 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    print(screenHeight);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -75,7 +77,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               ),
               Text(
                 'Product Specifications',
-                style: AppConstants.headingNormal,
+                style: AppConstants.headingBold,
               ),
               const SizedBox(
                 height: 15,

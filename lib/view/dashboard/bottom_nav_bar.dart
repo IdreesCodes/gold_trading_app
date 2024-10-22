@@ -144,7 +144,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: ColorConstants.primary,
@@ -179,7 +179,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               'assets/images/live_chart_active.png',
               width: 24, height: 24,
             ),
-            label: 'Second',
+            label: 'Live Prices',
           ),
            BottomNavigationBarItem(
             icon: Container(

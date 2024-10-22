@@ -14,6 +14,7 @@ class LivePricesScreen extends StatefulWidget {
 }
 
 class _LivePricesScreenState extends State<LivePricesScreen> {
+  var data = [0.0, 3.0,2.0, 3.0, 4.0, 6.0,4.0,3.0];
   int selectedIndex = 0;
  List<String> titleList=[
    'Gold',
@@ -96,7 +97,7 @@ class _LivePricesScreenState extends State<LivePricesScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const ChartWidget(),
+                     LineChartWidget(data: data)
                   ],
                 ),
               ),

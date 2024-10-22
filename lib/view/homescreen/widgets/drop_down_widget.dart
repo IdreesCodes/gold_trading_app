@@ -18,9 +18,9 @@ class _DropDownWidgetState extends State<DropDownWidget> {
     return DropdownButton<String>(
       dropdownColor: widget.whiteAppBar==true? const Color(0xffF2F2F2): const Color(0xff3a3a3a),
       value: dropdownValue,
-      icon: Icon(Icons.expand_more_sharp,color: widget.whiteAppBar==true?Colors.black:Colors.white,size: 18,),
+      icon: Icon(Icons.expand_more_sharp,color: widget.whiteAppBar==true?const Color(0xff575757):Colors.white,size: 18,),
       elevation: 16,
-      style:  TextStyle(color: widget.whiteAppBar==true?Colors.black:Colors.white),
+      style:  TextStyle(color: widget.whiteAppBar==true?const Color(0xff575757):Colors.white),
       underline: Container(
         height: 2,
         color: Colors.transparent,
