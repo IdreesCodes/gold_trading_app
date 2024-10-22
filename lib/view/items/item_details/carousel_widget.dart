@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class CustomImageCarousel extends StatefulWidget {
   final List<String> imageUrls;
-  final double height;
+
   final bool autoPlay;
 
   const CustomImageCarousel({
-    Key? key,
+    super.key,
     required this.imageUrls,
-    this.height = 300.0,
+
     this.autoPlay = true,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomImageCarousel> createState() => _CustomImageCarouselState();
@@ -24,7 +24,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height,
+
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -34,45 +34,73 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
         alignment: Alignment.center,
         children: [
           // Carousel
-          Positioned(
-            top: widget.height * 0.1,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: CarouselSlider(
-                items: widget.imageUrls.map((url) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        url,
-                        fit: BoxFit.contain,
-                      ),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              children: [
+
+                SizedBox(
+                  width: double.infinity,
+                  child: CarouselSlider(
+                    items: widget.imageUrls.map((url) {
+                      return Container(
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.symmetric(horizontal: 0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8.0),
+                          child: Image.asset(
+                            url,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    controller: _controller,
+                    options: CarouselOptions(
+                      viewportFraction: 1.0,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: widget.autoPlay,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: false,
+                      scrollDirection: Axis.horizontal,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _currentIndex = index;
+                        });
+                      },
                     ),
-                  );
-                }).toList(),
-                controller: _controller,
-                options: CarouselOptions(
-                  viewportFraction: 1.0,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: widget.autoPlay,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: false,
-                  scrollDirection: Axis.horizontal,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentIndex = index;
-                    });
-                  },
+                  ),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: widget.imageUrls.asMap().entries.map((entry) {
+                    return GestureDetector(
+                      onTap: () => _controller.animateToPage(entry.key),
+                      child: Container(
+                        width: 8.0,
+                        height: 8.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: _currentIndex == entry.key
+                            ? Image.asset('assets/images/carousel_active.png')
+                            : Image.asset('assets/images/carousel_inactive.png'),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
           ),
+
 
           // Left Navigation Arrow
           Positioned(
@@ -93,25 +121,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
           ),
 
           // Bottom Indicators
-          Positioned(
-            bottom: widget.height * 0.05,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: widget.imageUrls.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () => _controller.animateToPage(entry.key),
-                  child: Container(
-                    width: 8.0,
-                    height: 8.0,
-                    margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: _currentIndex == entry.key
-                        ? Image.asset('assets/images/carousel_active.png')
-                        : Image.asset('assets/images/carousel_inactive.png'),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
+
         ],
       ),
     );

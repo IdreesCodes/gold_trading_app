@@ -22,150 +22,166 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
       context: context,
       isScrollControlled: false,
       builder: (context) {
-        return SingleChildScrollView(
-          child: Container(
-            width: double.infinity,
-          
-            color: Colors.white,
-            child:  Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 20,
+        // Use StatefulBuilder to manage state inside BottomSheet
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                  Text('Filters',style: AppConstants.headingBold.copyWith(
-                      fontSize: 22
-                  ),),
-                  const SizedBox(
-                    height: 19,
-                  ),
-                  Text('Price Range',style: AppConstants.headingBold.copyWith(
-                      fontSize: 18,
-                    fontWeight: FontWeight.w400
-                  ),),
-                  const SizedBox(
-                    height: 19,
-                  ),
-                  SfRangeSlider(
-                    activeColor: ColorConstants.primary,
-                    min: 0.0,
-                    max: 100.0,
-                    values: _values,
-                    interval: 20,
-                    showTicks: true,
-                    showLabels: true,
-                    enableTooltip: true,
-                    minorTicksPerInterval: 1,
-                    onChanged: (SfRangeValues values){
-                      setState(() {
-                        _values = values;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
+                ),
+
+                child:  Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: AppTextFormField(
-                          hintText: "Min price",
-                          border: Border.all(
-                            color: Colors.black
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text('Filters',style: AppConstants.headingBold.copyWith(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700
+                      ),),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text('Price Range',style: AppConstants.headingBold.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600
+                      ),),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SfRangeSlider(
+                        activeColor: ColorConstants.primary,
+                        min: 0.0,
+                        max: 100.0,
+                        values: _values,
+                        interval: 20,
+                        showTicks: true,
+                        showLabels: true,
+                        enableTooltip: false,
+                        minorTicksPerInterval: 1,
+                        onChanged: (SfRangeValues values){
+                          setState(() {
+                            _values = values;
+                          });
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: AppTextFormField(
+                              hintText: "Min price",
+                              border: Border.all(
+                                  color: Colors.black
+                              ),
+                              backgroundColor: Colors.grey.shade100,
+                            ),
                           ),
+
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
+                            width: 5,
+                            height: 5,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey.shade200
+                            ),
+                          ),
+                          Expanded(
+                            child: AppTextFormField(
+                              hintText: "Max price",
+                              border: Border.all(
+                                  color: Colors.black
+                              ),
+                              backgroundColor: Colors.grey.shade100,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 19,
+                      ),
+                      Text('Product Status',style: AppConstants.headingBold.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600
+                      ),),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const StockStatusWidget(),
+                      const SizedBox(
+                        height: 19,
+                      ),
+
+
+                      Text('Category',style: AppConstants.headingBold.copyWith(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600
+                      ),),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: List.generate(3, (index) {
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                            },
+                            child: Container(
+
+                              margin: const EdgeInsets.symmetric(horizontal: 5),
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
+                              height: 40,
+
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color:  selectedIndex == index ?ColorConstants.primary: Colors.grey.shade100,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  titleList[index],
+                                  style: selectedIndex == index? AppConstants.descriptionWhite: AppConstants.description,
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      AbsorbPointer(
+                        child: AppTextFormField(
+                          suffixIcon: const Icon(Icons.expand_more,size: 24,),
+                          hintText: "Sub Categories",
                           backgroundColor: Colors.grey.shade100,
                         ),
                       ),
-          
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
-                        width: 5,
-                        height: 5,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.grey.shade200
-                        ),
-                      ),
-                      Expanded(
-                        child: AppTextFormField(
-                          hintText: "Max price",
-                          border: Border.all(
-                              color: Colors.black
-                          ),
-                          backgroundColor: Colors.grey.shade100,
-                        ),
+                      const SizedBox(
+                        height: 10,
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 19,
-                  ),
-                  Text('Product Status',style: AppConstants.headingBold.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400
-                  ),),
-                  const StockStatusWidget(),
-              const SizedBox(
-                height: 19,
+                ),
               ),
-          
-          
-            Text('Category',style: AppConstants.headingBold.copyWith(
-                fontSize: 18,
-                fontWeight: FontWeight.w400
-            ),),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(3, (index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedIndex = index;
-                          });
-                        },
-                        child: Container(
-          
-                          margin: const EdgeInsets.symmetric(horizontal: 5),
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          height: 40,
-          
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:  selectedIndex == index ?ColorConstants.primary: Colors.grey.shade100,
-                          ),
-                          child: Center(
-                            child: Text(
-                              titleList[index],
-                              style: selectedIndex == index? AppConstants.descriptionWhite: AppConstants.description,
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  AbsorbPointer(
-                    child: AppTextFormField(
-                      suffixIcon: const Icon(Icons.expand_more,size: 24,),
-                      hintText: "Sub Categories",
-                      backgroundColor: Colors.grey.shade100,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
@@ -173,7 +189,7 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
   void categoriesBottomSheet() {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: false,
+      isScrollControlled: true,
       builder: (context) {
         return SingleChildScrollView(
           child: Container(
@@ -281,6 +297,30 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
                     ),
                   ),
                   const SizedBox(
+                    height: 10,),  const SizedBox(
+                height: 10,),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                        fontWeight: FontWeight.w500
+                      ),
+                      hintText: "1 ounce gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,),  const SizedBox(
+                height: 10,),
+                  AbsorbPointer(
+                    child: AppTextFormField(
+                      hintTextStyle: const TextStyle(
+                        fontWeight: FontWeight.w500
+                      ),
+                      hintText: "10 ounce gram gold bar",
+                      backgroundColor: Colors.grey.shade100,
+                    ),
+                  ),
+                  const SizedBox(
                     height: 10,),
 
                 ],
@@ -313,10 +353,6 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
     "assets/images/gold.png"  ,
     "assets/images/gold.png"  ,
     "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
 
   ];
   @override
@@ -326,9 +362,9 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
       appBar: CustomAppBar(
         title: 'Search',
         actionButton:  [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
-            child: Icon(CupertinoIcons.search),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15),
+            child: Image.asset('assets/images/search.png',height: 22,width: 22,),
           ),
           GestureDetector(
             onTap: filtersBottomSheet,

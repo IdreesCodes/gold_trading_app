@@ -11,6 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
    CustomAppBar({
     super.key,
      this.title='',
+     this.whiteLogo,
      this.backGroundColor,
      this.fineGoldAppBar,
     this.home = false,
@@ -20,6 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
      this.leading,
   });
    String title;
+   bool? whiteLogo=false;
   final bool home;
   Color? backGroundColor;
   bool? fineGoldAppBar;
@@ -37,7 +39,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.asset(
-            'assets/images/fine_gold_bullion_dark.png',
+            whiteLogo==true? 'assets/images/fine_gold_bullion_white.png': 'assets/images/fine_gold_bullion_dark.png',
             height: 70,
             width: 110,
           ),
@@ -66,13 +68,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                         color: const Color(0xffF2F2F2),
-                        borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: const Icon(
-                      Icons.search,
-                      size: 20,
-                      color: Colors.black,
-                    ),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Image.asset('assets/images/search.png',height: 20,width: 20,),
+
                   ),
                 ),
               ],
