@@ -45,6 +45,10 @@ dependencies:
   chart_sparkline: ^1.1.1
   carousel_slider_plus: ^7.0.1
   syncfusion_flutter_sliders: ^27.1.53
+  dio: ^5.7.0
+  fluttertoast: ^8.2.8
+  connectivity_plus: ^6.1.0
+  flutter_riverpod: ^2.6.1
 
 dev_dependencies:
   flutter_test:
