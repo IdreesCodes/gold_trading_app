@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:fine_gold_flutter/model/product_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,22 +9,24 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../managers/dio_client.dart';
 import '../utils/api_constants.dart';
 
-class DashboardViewModel extends ChangeNotifier {
+class SearchViewModel extends ChangeNotifier {
 
   bool _loading = false;
   bool get loading => _loading;
+  ProductModel? productModel;
+
   setLoading(bool value) {
-      _loading = value;
-      notifyListeners();
+    _loading = value;
+    notifyListeners();
   }
 
   init() async {
     dynamic body = {};
     body = FormData.fromMap(body);
     try {
-      // dynamic response = await DioClient.instance.post(APIConstants., data: body);
-      // response = jsonDecode(response.toString());
-
+      dynamic response = await DioClient.instance.post(APIConstants.getProducts, data: body);
+      response = jsonDecode(response.toString());
+      productModel=ProductModel.fromJson(response);
     } catch (e) {
       if (kDebugMode) {
         Fluttertoast.showToast(
@@ -33,7 +36,9 @@ class DashboardViewModel extends ChangeNotifier {
           fontSize: 13.0,
         );
       }
-    } finally {}
+    } finally {
+      notifyListeners();
+    }
   }
 
 

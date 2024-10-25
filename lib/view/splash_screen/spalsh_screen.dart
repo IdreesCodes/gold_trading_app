@@ -29,20 +29,12 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-
-
     _bounceAnimation = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.2), weight: 1),
       TweenSequenceItem(tween: Tween(begin: 1.2, end: 0.9), weight: 1),
       TweenSequenceItem(tween: Tween(begin: 0.9, end: 1.0), weight: 1),
     ]).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-
-    _expandingCircleAnimation = Tween<double>(begin: 0.0, end: 1.5).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.7, 1.0, curve: Curves.fastOutSlowIn)),
-    );
-
-
+    _expandingCircleAnimation = Tween<double>(begin: 0.0, end: 1.5).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.7, 1.0, curve: Curves.fastOutSlowIn)),);
     _colorAnimation = ColorTween(
       begin: Colors.black,
       end: ColorConstants.white,

@@ -18,7 +18,7 @@ class _ChartWidgetState extends State<ChartWidget> {
       height: 200.0,
       child: Sparkline(
 
-      gridLineColor: Colors.grey.shade300,
+        gridLineColor: Colors.grey.shade300,
         gridLineLabelPrecision: 1,
         gridLinesEnable: true,
         lineColor: ColorConstants.primary,
