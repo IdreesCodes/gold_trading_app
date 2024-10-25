@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 30,
+                        height: 10,
                       ),
                       SizedBox(
                         height: screenHeight * 0.050,
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Text(
                         'Categories',
@@ -216,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
 
                       Row(
@@ -234,7 +234,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
 
                       SizedBox(
@@ -258,14 +258,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Text(
                         'New Arrivals',
                         style: AppConstants.headingBold.copyWith(fontSize: 20),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

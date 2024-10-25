@@ -1,45 +1,45 @@
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:chart_sparkline/chart_sparkline.dart';
-class ChartWidget extends StatefulWidget {
-  const ChartWidget({super.key});
 
-  @override
-  State<ChartWidget> createState() => _ChartWidgetState();
-}
-
-class _ChartWidgetState extends State<ChartWidget> {
-  var data = [0.0,5.0,0.0,15.0];
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 200.0,
-      child: Sparkline(
-
-      gridLineColor: Colors.grey.shade300,
-        gridLineLabelPrecision: 1,
-        gridLinesEnable: true,
-        lineColor: ColorConstants.primary,
-        fillColor: ColorConstants.primary.withOpacity(0.15),
-        fillMode: FillMode.below,
-        data: data,
-        lineWidth: 2.6,
-        gridLineAmount: 3,
-        xLabels: const ['April', 'May', 'Jun', 'July', 'Aug','Sep','Oct' ],
-        xLabelsStyle: const TextStyle(
-          fontSize: 8,
-          color: Colors.black54
-        ),
-
-      ),
-    );
-  }
-}
-
-
-
+// class ChartWidget extends StatefulWidget {
+//   const ChartWidget({super.key});
+//
+//   @override
+//   State<ChartWidget> createState() => _ChartWidgetState();
+// }
+//
+// class _ChartWidgetState extends State<ChartWidget> {
+//   var data = [0.0,5.0,0.0,15.0];
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       width: double.infinity,
+//       height: 200.0,
+//       child: Sparkline(
+//
+//       gridLineColor: Colors.grey.shade300,
+//         gridLineLabelPrecision: 1,
+//         gridLinesEnable: true,
+//         lineColor: ColorConstants.primary,
+//         fillColor: ColorConstants.primary.withOpacity(0.15),
+//         fillMode: FillMode.below,
+//         data: data,
+//         lineWidth: 2.6,
+//         gridLineAmount: 3,
+//         xLabels: const ['April', 'May', 'Jun', 'July', 'Aug','Sep','Oct' ],
+//         xLabelsStyle: const TextStyle(
+//           fontSize: 8,
+//           color: Colors.black54
+//         ),
+//
+//       ),
+//     );
+//   }
+// }
+//
+//
+//
 
 
 

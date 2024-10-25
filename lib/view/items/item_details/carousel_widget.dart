@@ -101,8 +101,6 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
             ),
           ),
 
-
-          // Left Navigation Arrow
           Positioned(
             left: 16,
             child: GestureDetector(
@@ -111,7 +109,6 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
             ),
           ),
 
-          // Right Navigation Arrow
           Positioned(
             right: 16,
             child: GestureDetector(
