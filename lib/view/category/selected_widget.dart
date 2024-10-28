@@ -1,6 +1,8 @@
+import 'package:fine_gold_flutter/common/providers/providers.dart';
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StockStatusWidget extends StatefulWidget {
   const StockStatusWidget({super.key});
@@ -11,36 +13,36 @@ class StockStatusWidget extends StatefulWidget {
 
 class _StockStatusWidgetState extends State<StockStatusWidget> {
 
-  String _selectedStockStatus = 'inStock';
 
-  void _onStockStatusSelected(String value) {
-    setState(() {
-      _selectedStockStatus = value;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return Consumer(
+      builder: (context,ref,_) {
+        var provider = ref.watch(productProvider);
+        return Column(
+          children: [
 
-        GestureDetector(
-          onTap: () => _onStockStatusSelected('inStock'),
-          child: StockOptionWidget(
-            title: 'In Stock',
-            isSelected: _selectedStockStatus == 'inStock',
-          ),
-        ),
-        const SizedBox(height: 16),
+            GestureDetector(
+              onTap: () => provider.setFilterValue(stockStatus:"instock" ),
+              child: StockOptionWidget(
+                title: 'In Stock',
+                isSelected: provider.filterStockStatus == 'instock',
+              ),
+            ),
 
-        GestureDetector(
-          onTap: () => _onStockStatusSelected('outOfStock'),
-          child: StockOptionWidget(
-            title: 'Out of Stock',
-            isSelected: _selectedStockStatus == 'outOfStock',
-          ),
-        ),
-      ],
+            const SizedBox(height: 16),
+
+            GestureDetector(
+              onTap: () => provider.setFilterValue(stockStatus:"outofstock" ),
+              child: StockOptionWidget(
+                title: 'Out of Stock',
+                isSelected: provider.filterStockStatus == 'outofstock',
+              ),
+            ),
+          ],
+        );
+      }
     );
   }
 }

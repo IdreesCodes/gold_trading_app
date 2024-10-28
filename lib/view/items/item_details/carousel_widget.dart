@@ -28,7 +28,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color(0xffDFE0DF)
+          color: const Color(0xffffffff)
       ),
       child: Stack(
         alignment: Alignment.center,
@@ -48,7 +48,7 @@ class _CustomImageCarouselState extends State<CustomImageCarousel> {
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
-                          child: Image.asset(
+                          child: Image.network(
                             url,
                             fit: BoxFit.contain,
                           ),

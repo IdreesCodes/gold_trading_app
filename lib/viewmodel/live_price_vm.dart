@@ -27,6 +27,7 @@ class LivePriceViewModel extends ChangeNotifier {
     _startLivePriceUpdates();
   }
 
+
   Future<void> _startLivePriceUpdates() async {
     // Call API immediately the first time
     await callGetLivePricesApi();
