@@ -33,6 +33,7 @@ class LivePriceViewModel extends ChangeNotifier {
     _startLivePriceUpdates();
   }
 
+
   Future<void> _startLivePriceUpdates() async {
     await callGetLivePricesApi();
     _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) async {

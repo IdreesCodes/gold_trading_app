@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/color_constants.dart';
-import '../../view/category/category_screen.dart';
+import '../../view/category/search_screen.dart';
 import '../../view/homescreen/widgets/drop_down_widget.dart';
 
 
@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return fineGoldAppBar==true?      Padding(
+    return fineGoldAppBar==true? Padding(
       padding:
       const EdgeInsets.fromLTRB(14, 40, 10, 0),
       child: Row(
@@ -61,7 +61,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 GestureDetector(
                   onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const CategorySearchScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SearchScreen()));
                   },
                   child: Container(
                     height: 35,
@@ -78,7 +78,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           )
         ],
       ),
-    ):AppBar(
+    ):
+    AppBar(
       bottom: bottom,
       flexibleSpace:Container(
         decoration: const BoxDecoration(
@@ -93,9 +94,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       title: Text(title, style: AppConstants.headingBold,),
       leading: leading ??(
-          home ?
-          InkWell(onTap: Scaffold.of(context).openDrawer, child: const Icon(Icons.menu, color: Colors.black,),):
-          InkWell(
+          home ? InkWell(onTap: Scaffold.of(context).openDrawer, child: const Icon(Icons.menu, color: Colors.black,),) : InkWell(
             onTap: () {
               Navigator.pop(context);
             },
@@ -103,8 +102,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icons.arrow_back,
               color: Colors.black,
             ),
-          )
-      ),
+          )),
       actions: actionButton,
       backgroundColor: ColorConstants.primary,
       centerTitle: true,

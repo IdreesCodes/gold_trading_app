@@ -5,7 +5,7 @@ import 'package:fine_gold_flutter/view/live_price/live_price_screen.dart';
 import 'package:fine_gold_flutter/view/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../category/category_screen.dart';
+import '../category/search_screen.dart';
 import '../category/category_sub_page/category_sub_page_screen.dart';
 import '../homescreen/home_screen.dart';
 

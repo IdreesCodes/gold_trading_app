@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/app_constants.dart';
+import '../items/item_details/item_detail_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -250,44 +251,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Top Products',
-                            style:
-                            AppConstants.headingBold.copyWith(fontSize: 20),
-                          ),
-                          Text(
-                            'See all',
-                            style: AppConstants.primaryColorHeading.copyWith(),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-
-                      SizedBox(
-                        height: screenHeight * 0.280,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: 3,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, i) {
-                            return TopProductsWidget(
-                              image: topProductImage[i],
-                              price: r'$120',
-                              desc: topProductdescription[i],
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 10,
-                            );
-                          },
-                        ),
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Text(
+                      //       'Top Products',
+                      //       style:
+                      //       AppConstants.headingBold.copyWith(fontSize: 20),
+                      //     ),
+                      //     Text(
+                      //       'See all',
+                      //       style: AppConstants.primaryColorHeading.copyWith(),
+                      //     ),
+                      //   ],
+                      // ),
+                      // const SizedBox(
+                      //   height: 15,
+                      // ),
+                      //
+                      // SizedBox(
+                      //   height: screenHeight * 0.280,
+                      //   child: ListView.separated(
+                      //     shrinkWrap: true,
+                      //     itemCount: 3,
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemBuilder: (context, i) {
+                      //       return TopProductsWidget(
+                      //         image: topProductImage[i],
+                      //         price: r'$120',
+                      //         desc: topProductdescription[i],
+                      //       );
+                      //     },
+                      //     separatorBuilder: (BuildContext context, int index) {
+                      //       return const SizedBox(
+                      //         width: 10,
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                       const SizedBox(
                         height: 15,
                       ),
@@ -345,12 +346,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   physics: const NeverScrollableScrollPhysics(),
                                   itemCount: products?.length,
                                   itemBuilder: (context, index) {
-                                    return   NewArrivalWidget(
-                                      image: products?[index].imageUrl??'',
-                                      desc: products?[index].title??'',
-                                      title: '',//products?[index].title??'',
-                                      price: products![index].price!.toStringAsFixed(2),
-                                    );
+                                    return  products![index].title!.contains(selectedIndex==0?"GOLD":selectedIndex==1?"SILVER":selectedIndex==2?"PLATINUM":"PALLADIUM")? GestureDetector(
+                                      onTap: (){
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemDetailScreen(products: products[index],)));
+                                      },
+                                      child: NewArrivalWidget(
+                                        image: products[index].imageUrl??'',
+                                        desc: products[index].title??'',
+                                        title: '',//products?[index].title??'',
+                                        price: products[index].price??"",
+                                      ),
+                                    ):const SizedBox();
                                   }
                               ),
                             ],

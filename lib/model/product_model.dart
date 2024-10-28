@@ -35,7 +35,7 @@ class Products {
   String? title;
   String? shortDescription;
   String? description;
-  double? price;
+  String? price;
   String? stockStatus;
   String? imageUrl;
   bool? galleryImages;
@@ -57,7 +57,7 @@ class Products {
     title = json['title'];
     shortDescription = json['short_description'];
     description = json['description'];
-    price = json['price'];
+    price=double.parse(json['price'].toString()).toStringAsFixed(2);
     stockStatus = json['stock_status'];
     imageUrl = json['image_url'];
     galleryImages = json['gallery_images'];
