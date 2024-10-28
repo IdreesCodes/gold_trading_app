@@ -36,12 +36,13 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                        padding: const EdgeInsets.all(10),
+                      // padding:  const EdgeInsets.all(3.0),
+                        height: 80,
                         width: double.infinity,
                         decoration:  BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.grey.shade200),
-                        child: Image.asset( widget.image,)),
+                        child: Image.network( widget.image,fit:BoxFit.cover ,)),
 
                   ],
                 ),
@@ -54,11 +55,11 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.title,style: AppConstants.headingBold,),
-             
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  // Text(widget.title,style: AppConstants.headingBold,),
+                  //
+                  // const SizedBox(
+                  //   height: 5,
+                  // ),
                   Text(
                     maxLines: 2,
                    widget.desc,style: AppConstants.description.copyWith(

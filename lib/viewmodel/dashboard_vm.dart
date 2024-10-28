@@ -12,6 +12,7 @@ class DashboardViewModel extends ChangeNotifier {
 
   bool _loading = false;
   bool get loading => _loading;
+
   setLoading(bool value) {
       _loading = value;
       notifyListeners();
@@ -23,7 +24,6 @@ class DashboardViewModel extends ChangeNotifier {
     try {
       // dynamic response = await DioClient.instance.post(APIConstants., data: body);
       // response = jsonDecode(response.toString());
-
     } catch (e) {
       if (kDebugMode) {
         Fluttertoast.showToast(

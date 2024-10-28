@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../main.dart';
 import '../utils/api_constants.dart';
 import '../utils/shared_pref_instance.dart';
 
@@ -23,6 +22,13 @@ class DioClient {
        'userToken': "acf2335a27302c694fb64fc180f76df560e23ccb7463f0d8" // fahadComp
     };
   String? token;
+  String? currency="CAD";
+
+  void setCurrency (String currency) {
+    this.currency = currency;
+    debugPrint('Currency has been set to $token');
+  }
+
   void setToken(String token) {
     this.token = token;
     debugPrint('Token has been set to $token');
@@ -37,7 +43,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      log("call get api : ${APIConstants.apiBaseUrl}$uri");
+      log("call get api : ${APIConstants.apiBaseUrl}$uri?currency=$currency");
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
         Fluttertoast.showToast(
@@ -54,7 +60,7 @@ class DioClient {
       }
 
       var response = await _dio.get(
-        uri,
+        "$uri?currency=$currency",
         queryParameters: queryParameters,
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
@@ -89,7 +95,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      log("call post api : ${APIConstants.apiBaseUrl}$uri");
+      log("call post api : ${APIConstants.apiBaseUrl}$uri?currency=$currency");
       log("body: $data");
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
@@ -106,7 +112,7 @@ class DioClient {
         return Future.value(null);
       }
       dynamic response = await _dio.post(
-        uri,
+        "$uri?currency=$currency",
         data: data,
         queryParameters: queryParameters,
         cancelToken: cancelToken,

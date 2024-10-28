@@ -39,7 +39,7 @@ class _TopProductsWidgetState extends State<TopProductsWidget> {
                   decoration:  BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Colors.grey.shade200),
-                  child: Image.asset(widget.image,)),
+                  child: Image.network(widget.image,)),
             ),
             const SizedBox(
               height: 5,

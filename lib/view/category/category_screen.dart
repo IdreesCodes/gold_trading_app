@@ -3,7 +3,9 @@ import 'package:fine_gold_flutter/common/widgets/custom_app_bar.dart';
 import 'package:fine_gold_flutter/view/category/selected_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+import '../../common/providers/providers.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/color_constants.dart';
 import '../homescreen/widgets/top_products_widget.dart';
@@ -340,7 +342,6 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
     'All',
     'Gold bars',
     'Gold Coins',
-
   ];
   List<String> images = [
 
@@ -428,28 +429,36 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Expanded(
-                child: GridView.builder(
-                  itemCount: images.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 15.0,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ItemDetailScreen()));
-                      },
-                      child: TopProductsWidget(
-                        image: images[index],
-                        price: r'$120',
-                        desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
+              Consumer(
+                builder: (context,ref,_) {
+                  var provider= ref.watch(productProvider);
+                  var products = provider.productModel?.products;
+                  return provider.productModel==null?
+                  const CircularProgressIndicator.adaptive():
+                  Expanded(
+                    child: GridView.builder(
+                      itemCount: products?.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.75,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 15.0,
                       ),
-                    );
-                  },
-                ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ItemDetailScreen()));
+                          },
+                          child: TopProductsWidget(
+                            image: products?[index].imageUrl??'',
+                            price: products![index].price!.toStringAsFixed(2),
+                            desc:  products[index].title??'',
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
               ),
             ],
           )),

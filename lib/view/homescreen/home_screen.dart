@@ -1,16 +1,15 @@
+import 'package:fine_gold_flutter/common/providers/providers.dart';
 import 'package:fine_gold_flutter/common/widgets/app_button.dart';
 import 'package:fine_gold_flutter/common/widgets/custom_app_bar.dart';
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/categories_widget.dart';
-import 'package:fine_gold_flutter/view/homescreen/widgets/drop_down_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/new_arival_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/prices_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/top_products_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/app_constants.dart';
-import '../category/category_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,16 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
     'Gold',
     'Silver',
     'Platinum',
-    'Gold',
-    'Silver',
   ];
+
   List<String> images = [
     'assets/images/gold_bisc.png',
     'assets/images/silver_bisc.png',
     'assets/images/platinum_bsic.png',
-    'assets/images/gold_bisc.png',
-    'assets/images/silver_bisc.png',
   ];
+
   List<Color> color = [
     ColorConstants.gold,
     ColorConstants.silver,
@@ -199,7 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 130,
                         child: ListView.separated(
                           shrinkWrap: true,
-                          itemCount: 5,
+                          itemCount:title.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, i) {
                             return CategoriesWidget(
@@ -218,7 +215,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -267,65 +263,72 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(4, (index) {
-                          return Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  selectedIndex = index;
-                                });
-                              },
-                              child: Container(
-                                margin:
-                                const EdgeInsets.symmetric(horizontal: 5),
-                                height: 37,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: selectedIndex == index
-                                      ? ColorConstants.primary.withOpacity(0.6)
-                                      : Colors.grey.shade100,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    titleList[index],
-                                    style: selectedIndex == index
-                                        ? AppConstants.descriptionWhite
-                                        : AppConstants.description,
-                                  ),
-                                ),
+                      Consumer(
+                        builder: (context,ref,_) {
+                          var provider= ref.watch(productProvider);
+                          var products = provider.productModel?.products;
+                          return provider.productModel==null?
+                          const CircularProgressIndicator.adaptive():
+                          Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(4, (index) {
+                                  return Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectedIndex = index;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin:
+                                        const EdgeInsets.symmetric(horizontal: 5),
+                                        height: 37,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          color: selectedIndex == index
+                                              ? ColorConstants.primary.withOpacity(0.6)
+                                              : Colors.grey.shade100,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            titleList[index],
+                                            style: selectedIndex == index
+                                                ? AppConstants.descriptionWhite
+                                                : AppConstants.description,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
                               ),
-                            ),
+                              ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: products?.length,
+                                  itemBuilder: (context, index) {
+                                    return   NewArrivalWidget(
+                                      image: products?[index].imageUrl??'',
+                                      desc: products?[index].title??'',
+                                      title: '',//products?[index].title??'',
+                                      price: products![index].price!.toStringAsFixed(2),
+                                    );
+                                  }
+                              ),
+                            ],
                           );
-                        }),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const NewArrivalWidget(
-                        image: 'assets/images/gold_bisc.png',
-                        price: r'$120',
-                        desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
-                        title: 'Gold Bar',
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      const NewArrivalWidget(
-                        image: 'assets/images/gold_bisc.png',
-                        price: r'$120',
-                        desc: 'Gold 1 OZ Royal Canadian Mint Bar .9999',
-                        title: 'Gold Bar',
-                      ),
-
+                        }
+                      ) ,
                     ],
                   ),
                 ),
               ),
             ],
           ),
-        ));
+        )
+    );
   }
 }

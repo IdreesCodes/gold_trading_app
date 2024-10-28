@@ -1,10 +1,11 @@
 import 'dart:async';
-
+import 'package:fine_gold_flutter/common/providers/providers.dart';
 import 'package:fine_gold_flutter/view/dashboard/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/color_constants.dart';
 
-class AnimationScreen extends StatefulWidget {
+class AnimationScreen extends ConsumerStatefulWidget {
   final Widget nextScreen;
 
   const AnimationScreen({
@@ -16,7 +17,7 @@ class AnimationScreen extends StatefulWidget {
   _AnimationScreenState createState() => _AnimationScreenState();
 }
 
-class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProviderStateMixin {
+class _AnimationScreenState extends ConsumerState<AnimationScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _bounceAnimation;
   late Animation<double> _expandingCircleAnimation;
@@ -25,24 +26,20 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(productProvider).init();
+    });
     _controller = AnimationController(
       duration: const Duration(milliseconds: 1500),
       vsync: this,
     );
-
-
     _bounceAnimation = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.2), weight: 1),
       TweenSequenceItem(tween: Tween(begin: 1.2, end: 0.9), weight: 1),
       TweenSequenceItem(tween: Tween(begin: 0.9, end: 1.0), weight: 1),
     ]).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-
-    _expandingCircleAnimation = Tween<double>(begin: 0.0, end: 1.5).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.7, 1.0, curve: Curves.fastOutSlowIn)),
-    );
-
-
+    _expandingCircleAnimation = Tween<double>(begin: 0.0, end: 1.5).animate(CurvedAnimation(parent: _controller, curve: const Interval(0.7, 1.0, curve: Curves.fastOutSlowIn)),);
     _colorAnimation = ColorTween(
       begin: Colors.black,
       end: ColorConstants.white,
@@ -58,6 +55,7 @@ class _AnimationScreenState extends State<AnimationScreen> with SingleTickerProv
         ),
       );
     });
+
   }
 
   @override
@@ -177,34 +175,5 @@ class SplashScreen extends StatelessWidget {
   }
 }
 
-// class CenterImageWidget extends StatelessWidget {
-//
-//   const CenterImageWidget({super.key});
-//
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         decoration:  BoxDecoration(
-//           gradient: LinearGradient(
-//               colors: [
-//                 ColorConstants.primary.withOpacity(0.1),
-//                 ColorConstants.primary.withOpacity(0.5),
-//               ],
-//               begin: Alignment.topCenter,
-//               end: Alignment.bottomCenter,
-//               tileMode: TileMode.decal
-//           ),
-//         ),
-//         child: Center(
-//           child: Image.asset(
-//             'assets/images/app_icon.png',
-//             width: 50,
-//             height: 50,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 

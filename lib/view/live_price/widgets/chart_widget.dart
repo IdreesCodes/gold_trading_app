@@ -1,6 +1,38 @@
 import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:chart_sparkline/chart_sparkline.dart';
+
+class ChartWidget extends StatefulWidget {
+  const ChartWidget({super.key});
+
+  @override
+  State<ChartWidget> createState() => _ChartWidgetState();
+}
+
+class _ChartWidgetState extends State<ChartWidget> {
+  var data = [0.0, 5.0, 0.0, 15.0];
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 200.0,
+      child: Sparkline(
+        gridLineColor: Colors.grey.shade300,
+        gridLineLabelPrecision: 1,
+        gridLinesEnable: true,
+        lineColor: ColorConstants.primary,
+        fillColor: ColorConstants.primary.withOpacity(0.15),
+        fillMode: FillMode.below,
+        data: data,
+        lineWidth: 2.6,
+        gridLineAmount: 3,
+        xLabels: const ['April', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct'],
+        xLabelsStyle: const TextStyle(fontSize: 8, color: Colors.black54),
+      ),
+    );
+  }
+}
 
 // class ChartWidget extends StatefulWidget {
 //   const ChartWidget({super.key});
@@ -41,8 +73,6 @@ import 'package:flutter/material.dart';
 //
 //
 
-
-
 class LineChartWidget extends StatelessWidget {
   final List<double> data;
 
@@ -80,7 +110,15 @@ class LineChartWidget extends StatelessWidget {
                 sideTitles: SideTitles(
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
-                    const titles = ['April', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct'];
+                    const titles = [
+                      'April',
+                      'May',
+                      'Jun',
+                      'July',
+                      'Aug',
+                      'Sep',
+                      'Oct'
+                    ];
                     final index = value.toInt();
                     if (index >= 0 && index < titles.length) {
                       return Text(
@@ -124,8 +162,7 @@ class LineChartWidget extends StatelessWidget {
                 barWidth: 2.6,
                 belowBarData: BarAreaData(
                     show: true,
-                    color: ColorConstants.primary.withOpacity(0.15)
-                ),
+                    color: ColorConstants.primary.withOpacity(0.15)),
                 dotData: const FlDotData(show: false),
               ),
             ],
