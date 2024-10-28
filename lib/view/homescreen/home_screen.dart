@@ -11,14 +11,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/app_constants.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<String> title = [
     'Gold',
     'Silver',
@@ -51,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   int selectedIndex = 0;
   List<String> titleList = ['Gold', 'Silver', 'Platinum', 'Palladium'];
+  final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
 
@@ -84,29 +85,63 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      SizedBox(
-                        height: screenHeight * 0.050,
-                        child: ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: 3,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, i) {
-                            return const PricesWidget(
-                              name: "Gold",
-                              price: r"$3723.54",
-                              fluctuation: "+64.38",
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(
-                              width: 10,
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                  Consumer(
+                      builder: (context, ref, _) {
+                        var provider = ref.watch(livePriceProvider);
+
+
+                        void autoScroll() {
+                          if (scrollController.hasClients) {
+                            final double end = scrollController.position.maxScrollExtent;
+                            final double start = scrollController.position.minScrollExtent;
+                            const duration = Duration(seconds: 30);
+                            scrollController.animateTo(
+                              end,
+                              duration: duration,
+                              curve: Curves.linear,
+                            ).then((_) {
+                              scrollController.animateTo(
+                                start,
+                                duration: Duration(milliseconds: 100),
+                                curve: Curves.linear,
+                              ).then((_) {
+                                if (scrollController.hasClients) autoScroll();
+                              });
+                            });
+                          }
+                        }
+                        WidgetsBinding.instance.addPostFrameCallback((_) => autoScroll());
+
+                        return SizedBox(
+                          height: screenHeight * 0.050,
+                          child: ListView.separated(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            itemCount: provider.livePriceModel?.livePrices?.length ?? 0,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, i) {
+                              return PricesWidget(
+                                name: provider.livePriceModel?.livePrices?[i].description
+                                    .toString()
+                                    .replaceAll("Spot", "") ??
+                                    "",
+                                price: provider.livePriceModel?.livePrices?[i].buyOzPrice
+                                    .toString()
+                                    .replaceAll("Spot", "") ??
+                                    "",
+                                fluctuation: "+64.38",
+                              );
+                            },
+                            separatorBuilder: (BuildContext context, int index) {
+                              return const SizedBox(
+                                width: 10,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                  ),
+                      const SizedBox(height: 20,),
 
                       Column(
                         children: [

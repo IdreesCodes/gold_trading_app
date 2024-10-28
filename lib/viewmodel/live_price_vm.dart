@@ -18,6 +18,12 @@ class LivePriceViewModel extends ChangeNotifier {
 
   LivePriceModel? livePriceModel;
 
+
+
+  List<double> goldList=[];
+  List<double> silverList=[];
+  List<double> platinumList=[];
+  List<double> palladiumList=[];
   setLoading(bool value) {
     _loading = value;
     notifyListeners();
@@ -28,22 +34,23 @@ class LivePriceViewModel extends ChangeNotifier {
   }
 
   Future<void> _startLivePriceUpdates() async {
-    // Call API immediately the first time
     await callGetLivePricesApi();
-
-    // Start timer for continuous calls
-    _timer = Timer.periodic(const Duration(seconds: 2), (Timer timer) async {
+    _timer = Timer.periodic(const Duration(seconds: 10), (Timer timer) async {
       await callGetLivePricesApi();
     });
   }
 
   Future<void>  callGetLivePricesApi() async {
-    dynamic body = {};
-    body = FormData.fromMap(body);
+
     try {
-      dynamic response = await DioClient.instance.post(APIConstants.getLivePrices, data: body);
+      dynamic response = await DioClient.instance.get(APIConstants.getLivePrices);
       response = jsonDecode(response.toString());
       livePriceModel=LivePriceModel.fromJson(response);
+      goldList.add(double.parse(livePriceModel?.livePrices?[0].buyOzPrice.toString()??''));
+      silverList.add(double.parse(livePriceModel?.livePrices?[1].buyOzPrice.toString()??''));
+      platinumList.add(double.parse(livePriceModel?.livePrices?[2].buyOzPrice.toString()??''));
+      palladiumList.add(double.parse(livePriceModel?.livePrices?[3].buyOzPrice.toString()??''));
+
     } catch (e) {
       if (kDebugMode) {
         Fluttertoast.showToast(
@@ -58,7 +65,6 @@ class LivePriceViewModel extends ChangeNotifier {
     }
   }
 
-  // To stop the updates if needed
   void stopLivePriceUpdates() {
     _timer?.cancel();
   }

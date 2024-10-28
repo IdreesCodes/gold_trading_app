@@ -29,11 +29,14 @@ class PricesWidget extends StatelessWidget {
             ),),
           ),
           Padding(
+
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(price??"",style: AppConstants.description.copyWith(
-                fontSize: 16,
-                color: const Color(0xffACACAC)
-            ),),
+            child: Text("\$${double.tryParse(price!)?.toStringAsFixed(1) ?? '0.000'}",
+     style: AppConstants.description.copyWith(
+    fontSize: 16,
+    color: const Color(0xffACACAC)
+    ),
+    )
           ),
           Padding(
             padding: const EdgeInsets.only(left:  0.0),

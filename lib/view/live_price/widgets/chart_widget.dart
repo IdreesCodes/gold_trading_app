@@ -11,6 +11,7 @@ class ChartWidget extends StatefulWidget {
 }
 
 class _ChartWidgetState extends State<ChartWidget> {
+
   var data = [0.0, 5.0, 0.0, 15.0];
   @override
   Widget build(BuildContext context) {
@@ -73,11 +74,26 @@ class _ChartWidgetState extends State<ChartWidget> {
 //
 //
 
-class LineChartWidget extends StatelessWidget {
+class LineChartWidget extends StatefulWidget {
   final List<double> data;
 
-  const LineChartWidget({Key? key, required this.data}) : super(key: key);
 
+  const LineChartWidget({super.key, required this.data});
+
+  @override
+  State<LineChartWidget> createState() => _LineChartWidgetState();
+}
+
+class _LineChartWidgetState extends State<LineChartWidget> {
+  String formatNumber(double number) {
+    if (number >= 1000 && number < 1000000) {
+      return "${(number / 1000).toStringAsFixed(1)}k";
+    } else if (number >= 1000000) {
+      return "${(number / 1000000).toStringAsFixed(1)}M";
+    } else {
+      return number.toStringAsFixed(0);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -85,88 +101,71 @@ class LineChartWidget extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 2,
         child: LineChart(
-          LineChartData(
-            gridData: FlGridData(
-              show: true,
-              drawVerticalLine: false,
-              horizontalInterval: 1,
-              verticalInterval: 1,
-              getDrawingHorizontalLine: (value) {
-                return FlLine(
+            LineChartData(
+              minY: widget.data.reduce((a, b) => a < b ? a : b) - 10,
+              maxY: widget.data.reduce((a, b) => a > b ? a : b) + 10,
+              gridData: FlGridData(
+                show: true,
+                drawVerticalLine: false,
+                horizontalInterval: 1,
+                verticalInterval: 1,
+                getDrawingHorizontalLine: (value) => FlLine(
                   color: Colors.grey.shade200,
                   strokeWidth: 1,
-                );
-              },
-            ),
-            titlesData: FlTitlesData(
-              show: true,
-              rightTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
+                ),
               ),
-              topTitles: const AxisTitles(
-                sideTitles: SideTitles(showTitles: false),
-              ),
-              bottomTitles: AxisTitles(
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  getTitlesWidget: (value, meta) {
-                    const titles = [
-                      'April',
-                      'May',
-                      'Jun',
-                      'July',
-                      'Aug',
-                      'Sep',
-                      'Oct'
-                    ];
-                    final index = value.toInt();
-                    if (index >= 0 && index < titles.length) {
+              titlesData: FlTitlesData(
+                show: true,
+                rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                bottomTitles: const AxisTitles(
+                  // sideTitles: SideTitles(
+                  //   showTitles: true,
+                  //   getTitlesWidget: (value, meta) {
+                  //     final index = value.toInt();
+                  //     return Text(
+                  //       'Point $index',
+                  //       style: TextStyle(fontSize: 8, color: Colors.grey.shade600),
+                  //     );
+                  //   },
+                  // ),
+                ),
+                leftTitles: AxisTitles(
+                  axisNameSize: 14,
+                  sideTitles: SideTitles(
+                    showTitles: true,
+                    interval: 3,
+                    getTitlesWidget: (value, meta) {
                       return Text(
-                        titles[index],
+                        formatNumber(value),
                         style: TextStyle(
-                          fontSize: 8,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w300,
                           color: Colors.grey.shade600,
                         ),
                       );
-                    }
-                    return const Text('');
-                  },
+                    },
+                  ),
                 ),
               ),
-              leftTitles: AxisTitles(
-                axisNameSize: 14,
-                sideTitles: SideTitles(
-                  showTitles: true,
-                  interval: 3,
-                  getTitlesWidget: (value, meta) {
-                    return Text(
-                      value.toStringAsFixed(0),
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.grey.shade600,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            borderData: FlBorderData(show: false),
-            lineBarsData: [
-              LineChartBarData(
-                spots: data.asMap().entries.map((e) {
-                  return FlSpot(e.key.toDouble(), e.value);
-                }).toList(),
-                isCurved: false,
-                color: ColorConstants.primary,
-                barWidth: 2.6,
-                belowBarData: BarAreaData(
+              borderData: FlBorderData(show: false),
+              lineBarsData: [
+                LineChartBarData(
+                  spots: widget.data.asMap().entries.map((e) {
+                    return FlSpot(e.key.toDouble(), e.value);
+                  }).toList(),
+                  isCurved: false,
+                  color: ColorConstants.primary,
+                  barWidth: 2.6,
+                  belowBarData: BarAreaData(
                     show: true,
-                    color: ColorConstants.primary.withOpacity(0.15)),
-                dotData: const FlDotData(show: false),
-              ),
-            ],
-          ),
+                    color: ColorConstants.primary.withOpacity(0.15),
+                  ),
+                  dotData: const FlDotData(show: false),
+                ),
+              ],
+            )
+
         ),
       ),
     );

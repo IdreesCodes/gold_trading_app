@@ -24,7 +24,6 @@ class _CategorySearchScreenState extends State<CategorySearchScreen> {
       context: context,
       isScrollControlled: false,
       builder: (context) {
-        // Use StatefulBuilder to manage state inside BottomSheet
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return SingleChildScrollView(

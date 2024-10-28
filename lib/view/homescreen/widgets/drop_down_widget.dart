@@ -1,6 +1,7 @@
+import 'package:fine_gold_flutter/managers/dio_client.dart';
 import 'package:flutter/material.dart';
 
-List<String> list = [r'  $CAD  ', r'  $USD  ',];
+List<String> list = ['CAD  ', 'USD',];
 class DropDownWidget extends StatefulWidget {
  final bool? whiteAppBar;
   const DropDownWidget({super.key , this.whiteAppBar});
@@ -28,13 +29,14 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       onChanged: (String? value) {
 
         setState(() {
-          dropdownValue = value!;
+          DioClient.instance.setCurrency(value!);
+          dropdownValue = value;
         });
       },
       items: list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text("\$  $value"),
         );
       }).toList(),
     );

@@ -29,6 +29,7 @@ class _AnimationScreenState extends ConsumerState<AnimationScreen> with SingleTi
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(productProvider).init();
+      ref.read(livePriceProvider).init();
     });
     _controller = AnimationController(
       duration: const Duration(milliseconds: 1500),
@@ -132,7 +133,7 @@ class SplashScreen extends StatelessWidget {
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },
-          transitionDuration: const Duration(milliseconds: 300),
+          transitionDuration: const Duration(milliseconds: 500),
         ),
       );
     });
