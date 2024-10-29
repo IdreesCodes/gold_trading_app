@@ -29,14 +29,14 @@ class _DropDownWidgetState extends State<DropDownWidget> {
       onChanged: (String? value) {
 
         setState(() {
-          DioClient.instance.setCurrency(value!);
-          dropdownValue = value;
+          DioClient.instance.setCurrency(value??"CAD");
+          dropdownValue = value??"CAD";
         });
       },
       items: list.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text("\$  $value"),
+          child: Text(" \$ $value"),
         );
       }).toList(),
     );

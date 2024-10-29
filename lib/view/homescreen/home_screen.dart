@@ -86,62 +86,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                  Consumer(
-                      builder: (context, ref, _) {
-                        var provider = ref.watch(livePriceProvider);
-
-
-                        void autoScroll() {
-                          if (scrollController.hasClients) {
-                            final double end = scrollController.position.maxScrollExtent;
-                            final double start = scrollController.position.minScrollExtent;
-                            const duration = Duration(seconds: 30);
-                            scrollController.animateTo(
-                              end,
-                              duration: duration,
-                              curve: Curves.linear,
-                            ).then((_) {
-                              scrollController.animateTo(
-                                start,
-                                duration: Duration(milliseconds: 100),
-                                curve: Curves.linear,
-                              ).then((_) {
-                                if (scrollController.hasClients) autoScroll();
-                              });
-                            });
-                          }
-                        }
-                        WidgetsBinding.instance.addPostFrameCallback((_) => autoScroll());
-
-                        return SizedBox(
-                          height: screenHeight * 0.050,
-                          child: ListView.separated(
-                            controller: scrollController,
-                            shrinkWrap: true,
-                            itemCount: provider.livePriceModel?.livePrices?.length ?? 0,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, i) {
-                              return PricesWidget(
-                                name: provider.livePriceModel?.livePrices?[i].description
-                                    .toString()
-                                    .replaceAll("Spot", "") ??
-                                    "",
-                                price: provider.livePriceModel?.livePrices?[i].buyOzPrice
-                                    .toString()
-                                    .replaceAll("Spot", "") ??
-                                    "",
-                                fluctuation: "+64.38",
-                              );
-                            },
-                            separatorBuilder: (BuildContext context, int index) {
-                              return const SizedBox(
-                                width: 10,
-                              );
-                            },
-                          ),
-                        );
-                      }
-                  ),
+                      const AbsorbPointer(child: AutoScrollingPrices()),
                       const SizedBox(height: 20,),
 
                       Column(

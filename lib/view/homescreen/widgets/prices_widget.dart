@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common/providers/providers.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/color_constants.dart';
 
@@ -47,6 +49,91 @@ class PricesWidget extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+
+class AutoScrollingPrices extends StatefulWidget {
+  const AutoScrollingPrices({super.key});
+
+  @override
+  _AutoScrollingPricesState createState() => _AutoScrollingPricesState();
+}
+
+class _AutoScrollingPricesState extends State<AutoScrollingPrices> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => autoScroll());
+  }
+
+  void autoScroll() {
+    if (_scrollController.hasClients) {
+      final double end = _scrollController.position.maxScrollExtent;
+      final double start = _scrollController.position.minScrollExtent;
+
+      const duration = Duration(seconds: 20);
+
+      _scrollController.animateTo(
+        end,
+        duration: duration,
+        curve: Curves.linear,
+      ).then((_) {
+        _scrollController.animateTo(
+          start,
+          duration: const Duration(milliseconds: 50),
+          curve: Curves.linear,
+        ).then((_) {
+          if (_scrollController.hasClients) autoScroll();
+        });
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Consumer(
+        builder: (context, ref, _) {
+          var provider = ref.watch(livePriceProvider);
+          return SizedBox(
+            height: screenHeight * 0.050,
+            child: ListView.separated(
+              controller: _scrollController,
+              shrinkWrap: true,
+              itemCount: provider.livePriceModel?.livePrices?.length ?? 0,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, i) {
+                return PricesWidget(
+                  name: provider.livePriceModel?.livePrices?[i].description
+                      .toString()
+                      .replaceAll("Spot", "") ??
+                      "",
+                  price: provider.livePriceModel?.livePrices?[i].buyOzPrice
+                      .toString()
+                      .replaceAll("Spot", "") ??
+                      "",
+                  fluctuation: "+64.38",
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  width: 10,
+                );
+              },
+            ),
+          );
+        }
     );
   }
 }

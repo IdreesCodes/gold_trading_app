@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fine_gold_flutter/utils/app_constants.dart';
 import 'package:fine_gold_flutter/view/items/item_details/product_specs_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import 'carousel_widget.dart';
@@ -16,6 +17,20 @@ class ItemDetailScreen extends StatefulWidget {
 }
 
 class _ItemDetailScreenState extends State<ItemDetailScreen> {
+  final String phoneNumber = '(708) 345-7640';
+
+  Future<void> launchNumber() async {
+    final Uri _phoneLaunchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+
+    if (!await canLaunch(_phoneLaunchUri.toString())) {
+      throw 'Could not launch $_phoneLaunchUri';
+    }
+
+    await launch(_phoneLaunchUri.toString());
+  }
   List<String> imagesUrl = [];
   @override
   void initState() {
@@ -119,7 +134,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
               ),
               CustomButton(
                   onPress: () {
-
+                    launchNumber();
                   },
                   title: 'Call Now',
                   bgColor: Colors.white,
