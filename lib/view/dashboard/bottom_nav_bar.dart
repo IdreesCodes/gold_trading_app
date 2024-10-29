@@ -4,6 +4,7 @@ import 'package:fine_gold_flutter/view/blogs/blog_screen.dart';
 import 'package:fine_gold_flutter/view/live_price/live_price_screen.dart';
 import 'package:fine_gold_flutter/view/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../category/search_screen.dart';
 import '../category/category_sub_page/category_sub_page_screen.dart';
@@ -181,7 +182,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             label: 'Live Prices',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Container(
               height: 50,
               width: 50,
@@ -205,6 +206,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             label: 'Categories',
           ),
           BottomNavigationBarItem(
+
             icon: Image.asset(
               'assets/images/category.png',
               width: 24, height: 24,

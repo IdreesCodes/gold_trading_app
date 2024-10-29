@@ -17,7 +17,7 @@ class ItemDetailScreen extends StatefulWidget {
 }
 
 class _ItemDetailScreenState extends State<ItemDetailScreen> {
-  final String phoneNumber = '(708) 345-7640';
+  final String phoneNumber = '+1 9056949997';
 
   Future<void> launchNumber() async {
     final Uri _phoneLaunchUri = Uri(
@@ -148,7 +148,7 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                   try {
                     final url = Uri.parse("https://finegoldbullion.ca/checkout/?add-to-cart=${widget.products.id}&quantity=1");
                     if (await canLaunchUrl(url)) {
-                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                      await launchUrl(url, mode: LaunchMode.inAppWebView);
                     } else {
                       throw "Could not launch $url";
                     }

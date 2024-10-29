@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/app_constants.dart';
+import '../category/category_sub_page/category_products.dart';
 import '../items/item_details/item_detail_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -23,20 +24,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     'Gold',
     'Silver',
     'Platinum',
+    'Palladium',
   ];
 
   List<String> images = [
     'assets/images/gold_bisc.png',
     'assets/images/silver_bisc.png',
     'assets/images/platinum_bsic.png',
+    'assets/images/pladium_bisc.png',
   ];
 
   List<Color> color = [
     ColorConstants.gold,
     ColorConstants.silver,
     ColorConstants.platinum,
-    ColorConstants.gold,
-    ColorConstants.silver,
+    const Color(0xff727272),
   ];
 
   List<String> topProductImage = [
@@ -85,7 +87,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      const AbsorbPointer(child: AutoScrollingPrices()),
+                      // const AbsorbPointer(child: AutoScrollingPrices()),
                       const SizedBox(height: 20,),
 
                       Column(
@@ -179,10 +181,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           itemCount:title.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, i) {
-                            return CategoriesWidget(
-                              name: title[i],
-                              image: images[i],
-                              color: color[i],
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategoryProducts(selectedIndex: i,)));
+                              },
+                              child: CategoriesWidget(
+                                name: title[i],
+                                image: images[i],
+                                color: color[i],
+                              ),
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) {
@@ -268,9 +275,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         width: double.infinity,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(20),
-                                          color: selectedIndex == index
-                                              ? ColorConstants.primary.withOpacity(0.6)
-                                              : Colors.grey.shade100,
+                                          color: selectedIndex == index ? ColorConstants.primary.withOpacity(0.6) : Colors.grey.shade100,
                                         ),
                                         child: Center(
                                           child: Text(

@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../homescreen/widgets/top_products_widget.dart';
+import 'category_products.dart';
 
 class CategorySubPageScreen extends StatefulWidget {
   const CategorySubPageScreen({super.key});
@@ -66,7 +67,14 @@ class _CategorySubPageScreenState extends State<CategorySubPageScreen> {
             mainAxisSpacing: 20.0,
           ),
           itemBuilder: (BuildContext context, int index) {
-            return  SubPageWidget(image: images[index], color: color[index], title: title[index],);
+            return  GestureDetector(
+              onTap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CategoryProducts(selectedIndex: index,)));
+              },
+                child: SubPageWidget(
+                  image: images[index], color: color[index], title: title[index],
+                )
+            );
           },
         ),
       ),
