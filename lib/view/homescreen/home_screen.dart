@@ -5,7 +5,6 @@ import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/categories_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/new_arival_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/prices_widget.dart';
-import 'package:fine_gold_flutter/view/homescreen/widgets/top_products_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

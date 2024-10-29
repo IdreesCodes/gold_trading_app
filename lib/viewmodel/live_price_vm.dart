@@ -30,7 +30,7 @@ class LivePriceViewModel extends ChangeNotifier {
   }
 
   void init() {
-    _startLivePriceUpdates();
+   // _startLivePriceUpdates();
   }
 
 

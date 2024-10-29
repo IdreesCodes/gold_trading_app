@@ -144,7 +144,18 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                 height: 10,
               ),
               CustomButton(
-                onPress: () {},
+                onPress: () async {
+                  try {
+                    final url = Uri.parse("https://finegoldbullion.ca/checkout/?add-to-cart=${widget.products.id}&quantity=1");
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                    } else {
+                      throw "Could not launch $url";
+                    }
+                  } catch (e) {
+                    print("Error launching URL: $e");
+                  }
+                },
                 title: 'Add to Cart',
               ),
               const SizedBox(

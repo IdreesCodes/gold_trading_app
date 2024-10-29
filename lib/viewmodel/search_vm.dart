@@ -19,8 +19,8 @@ class SearchViewModel extends ChangeNotifier {
   ProductModel? productModel;
 
   String filterStockStatus = '';
-  TextEditingController filterMaxPriceController =TextEditingController();
-  TextEditingController filterMinPriceController =TextEditingController();
+  TextEditingController filterMaxPriceController =TextEditingController(text: '999999');
+  TextEditingController filterMinPriceController =TextEditingController(text:'0');
 
   SfRangeValues values = const SfRangeValues(0.0, 999999.0);
 
@@ -69,8 +69,8 @@ class SearchViewModel extends ChangeNotifier {
 
   removeFilter(){
     searchController.text='';
-    filterMinPriceController.text='';
-    filterMaxPriceController.text='';
+    filterMinPriceController.text='0';
+    filterMaxPriceController.text='999999';
     filterStockStatus='';
     values = const SfRangeValues(0.0, 999999.0);
   }
