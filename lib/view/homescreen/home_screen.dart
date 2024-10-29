@@ -5,7 +5,6 @@ import 'package:fine_gold_flutter/utils/color_constants.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/categories_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/new_arival_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/prices_widget.dart';
-import 'package:fine_gold_flutter/view/homescreen/widgets/top_products_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -89,29 +88,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   Consumer(
                       builder: (context, ref, _) {
                         var provider = ref.watch(livePriceProvider);
-
-
-                        void autoScroll() {
-                          if (scrollController.hasClients) {
-                            final double end = scrollController.position.maxScrollExtent;
-                            final double start = scrollController.position.minScrollExtent;
-                            const duration = Duration(seconds: 30);
-                            scrollController.animateTo(
-                              end,
-                              duration: duration,
-                              curve: Curves.linear,
-                            ).then((_) {
-                              scrollController.animateTo(
-                                start,
-                                duration: Duration(milliseconds: 100),
-                                curve: Curves.linear,
-                              ).then((_) {
-                                if (scrollController.hasClients) autoScroll();
-                              });
-                            });
-                          }
-                        }
-                        WidgetsBinding.instance.addPostFrameCallback((_) => autoScroll());
+                        // void autoScroll() {
+                        //   if (scrollController.hasClients) {
+                        //     final double end = scrollController.position.maxScrollExtent;
+                        //     final double start = scrollController.position.minScrollExtent;
+                        //     const duration = Duration(seconds: 30);
+                        //     scrollController.animateTo(
+                        //       end,
+                        //       duration: duration,
+                        //       curve: Curves.linear,
+                        //     ).then((_) {
+                        //       scrollController.animateTo(
+                        //         start,
+                        //         duration: Duration(milliseconds: 100),
+                        //         curve: Curves.linear,
+                        //       ).then((_) {
+                        //         if (scrollController.hasClients) autoScroll();
+                        //       });
+                        //     });
+                        //   }
+                        // }
+                        // WidgetsBinding.instance.addPostFrameCallback((_) => autoScroll());
 
                         return SizedBox(
                           height: screenHeight * 0.050,

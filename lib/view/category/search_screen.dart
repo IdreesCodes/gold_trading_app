@@ -132,11 +132,11 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                             enableTooltip: false,
                             minorTicksPerInterval: 1,
                             onChanged: (SfRangeValues values){
-                              setState(() {
+
                                 provider.filterMinPriceController.text=double.parse(values.start.toString()).toStringAsFixed(0);
                                 provider.filterMaxPriceController.text=double.parse(values.end.toString()).toStringAsFixed(0);
-                                provider.values = values;
-                              });
+                                provider.setFilterValue();
+
                             },
                           ),
                           const SizedBox(
@@ -364,21 +364,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   int selectedIndex = 0;
   List<String> titleList=[
     'All',
-    'Gold bars',
-    'Gold Coins',
-  ];
-  List<String> images = [
-
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-    "assets/images/gold.png"  ,
-
+    // 'Gold bars',
+    // 'Gold Coins',
   ];
 
   @override
@@ -456,7 +443,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: List.generate(3, (index) {
+                    children: List.generate(titleList.length, (index) {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
@@ -481,23 +468,23 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                       );
                     }),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: (){
-
-                        categoriesBottomSheet();
-
-                    },
-                    child: AbsorbPointer(
-                      child: AppTextFormField(
-                        suffixIcon: const Icon(Icons.expand_more,size: 24,),
-                        hintText: "Sub Categories",
-                        backgroundColor: Colors.grey.shade100,
-                      ),
-                    ),
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
+                  // GestureDetector(
+                  //   onTap: (){
+                  //
+                  //       categoriesBottomSheet();
+                  //
+                  //   },
+                  //   child: AbsorbPointer(
+                  //     child: AppTextFormField(
+                  //       suffixIcon: const Icon(Icons.expand_more,size: 24,),
+                  //       hintText: "Sub Categories",
+                  //       backgroundColor: Colors.grey.shade100,
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -516,13 +503,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
                         return GestureDetector(
                           onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemDetailScreen(products: products![index],)));
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemDetailScreen(products: products[index],)));
                           },
                           child:
                           TopProductsWidget(
-                            image: products?[index].imageUrl??'',
-                            price: products?[index].price??'',
-                            desc:  products?[index].title??'',
+                            image: products[index].imageUrl??'',
+                            price: products[index].price??'',
+                            desc:  products[index].title??'',
                           ),
                         );
                       },

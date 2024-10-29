@@ -4,6 +4,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:fine_gold_flutter/utils/app_constants.dart';
 import 'package:fine_gold_flutter/view/items/item_details/product_specs_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../common/widgets/custom_app_bar.dart';
 import 'carousel_widget.dart';
@@ -129,7 +130,18 @@ class _ItemDetailScreenState extends State<ItemDetailScreen> {
                 height: 10,
               ),
               CustomButton(
-                onPress: () {},
+                onPress: () async {
+                  try {
+                    final url = Uri.parse("https://finegoldbullion.ca/checkout/?add-to-cart=${widget.products.id}&quantity=1");
+                    if (await canLaunchUrl(url)) {
+                      await launchUrl(url, mode: LaunchMode.externalApplication);
+                    } else {
+                      throw "Could not launch $url";
+                    }
+                  } catch (e) {
+                    print("Error launching URL: $e");
+                  }
+                },
                 title: 'Add to Cart',
               ),
               const SizedBox(

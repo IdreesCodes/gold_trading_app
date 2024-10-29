@@ -48,14 +48,14 @@ class _CategorySubPageScreenState extends State<CategorySubPageScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-        AppTextFormField(
-          prefixIcon: const Icon(CupertinoIcons.search,size: 24,),
-          hintText: "Search",
-          backgroundColor: Colors.grey.shade100,
-        ),
-      const SizedBox(
-        height: 20,
-      ),
+      //   AppTextFormField(
+      //     prefixIcon: const Icon(CupertinoIcons.search,size: 24,),
+      //     hintText: "Search",
+      //     backgroundColor: Colors.grey.shade100,
+      //   ),
+      // const SizedBox(
+      //   height: 20,
+      // ),
       Expanded(
         child: GridView.builder(
           itemCount: images.length,
