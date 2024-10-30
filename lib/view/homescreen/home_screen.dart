@@ -87,7 +87,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
+<<<<<<< Updated upstream
                       // const AbsorbPointer(child: AutoScrollingPrices()),
+=======
+                   //   const AbsorbPointer(child: AutoScrollingPrices()),
+>>>>>>> Stashed changes
                       const SizedBox(height: 20,),
 
                       Column(

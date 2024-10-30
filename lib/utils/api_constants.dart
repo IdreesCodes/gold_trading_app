@@ -10,6 +10,6 @@ class APIConstants {
 
   //Urls for APIs
   static const getProducts = "products";
-  static const getLivePrices = "live_prices";
+  static const getLivePrices = "live_prices/";
 
 }

@@ -30,7 +30,7 @@ class LivePriceViewModel extends ChangeNotifier {
   }
 
   void init() {
-   // _startLivePriceUpdates();
+   _startLivePriceUpdates();
   }
 
 
@@ -45,7 +45,9 @@ class LivePriceViewModel extends ChangeNotifier {
 
     try {
       dynamic response = await DioClient.instance.get(APIConstants.getLivePrices);
+      print("the response is" );
       response = jsonDecode(response.toString());
+
       livePriceModel=LivePriceModel.fromJson(response);
       goldList.add(double.parse(livePriceModel?.livePrices?[0].buyOzPrice.toString()??''));
       silverList.add(double.parse(livePriceModel?.livePrices?[1].buyOzPrice.toString()??''));

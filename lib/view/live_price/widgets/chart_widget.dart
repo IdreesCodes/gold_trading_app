@@ -107,7 +107,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
               gridData: FlGridData(
                 show: true,
                 drawVerticalLine: false,
-                horizontalInterval: 1,
+                horizontalInterval: 100,
                 verticalInterval: 1,
                 getDrawingHorizontalLine: (value) => FlLine(
                   color: Colors.grey.shade200,
@@ -134,7 +134,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                   axisNameSize: 14,
                   sideTitles: SideTitles(
                     showTitles: true,
-                    interval: 3,
+                    interval: 200,
                     getTitlesWidget: (value, meta) {
                       return Text(
                         formatNumber(value),

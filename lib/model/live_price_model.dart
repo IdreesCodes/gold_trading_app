@@ -8,17 +8,17 @@ class LivePriceModel {
     if (json['live_prices'] != null) {
       livePrices = <LivePrices>[];
       json['live_prices'].forEach((v) {
-        livePrices!.add(new LivePrices.fromJson(v));
+        livePrices!.add( LivePrices.fromJson(v));
       });
     }
     margins =
-    json['margins'] != null ? new Margins.fromJson(json['margins']) : null;
+    json['margins'] != null ?  Margins.fromJson(json['margins']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.livePrices != null) {
-      data['live_prices'] = this.livePrices!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (livePrices != null) {
+      data['live_prices'] = livePrices!.map((v) => v.toJson()).toList();
     }
     if (this.margins != null) {
       data['margins'] = this.margins!.toJson();
