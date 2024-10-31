@@ -108,7 +108,7 @@ class _AutoScrollingPricesState extends State<AutoScrollingPrices> {
           var provider = ref.watch(livePriceProvider);
           return SizedBox(
             height: screenHeight * 0.050,
-            child: ListView.separated(
+            child:provider.livePriceModel?.livePrices?.length==0 || provider.livePriceModel==null? SizedBox():ListView.separated(
               controller: _scrollController,
               shrinkWrap: true,
               itemCount: provider.livePriceModel?.livePrices?.length ?? 0,

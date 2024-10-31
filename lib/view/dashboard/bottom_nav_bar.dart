@@ -24,7 +24,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const LivePricesScreen(),
     Container(),
     const CategorySubPageScreen(),
-    const BlogScreen(),
+    const SettingsScreen(),
   ];
 
   void _onTap(int index) {
@@ -64,9 +64,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const BlogScreen()));
-
+                        onTap: () async {
+                          try {
+                            final url = Uri.parse("https://finegoldbullion.ca/blog/");
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url, mode: LaunchMode.inAppWebView);
+                            } else {
+                              throw "Could not launch $url";
+                            }
+                          } catch (e) {
+                            print("Error launching URL: $e");
+                          }
                         },
                         child: Container(
 
@@ -207,15 +215,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
           BottomNavigationBarItem(
 
-            icon: Image.asset(
-              'assets/images/category.png',
-              width: 24, height: 24,
-            ),
-            activeIcon: Image.asset(
-              'assets/images/category_active.png',
-              width: 24, height: 24,
-            ),
-            label: 'Cart',
+            icon: Icon(Icons.settings,size: 26,),
+            activeIcon: Icon(Icons.settings, color: ColorConstants.primary,size: 26,),
+            label: 'Settings',
           ),
         ],
       ),

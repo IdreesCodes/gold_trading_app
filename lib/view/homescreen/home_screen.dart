@@ -6,7 +6,6 @@ import 'package:fine_gold_flutter/view/homescreen/widgets/categories_widget.dart
 import 'package:fine_gold_flutter/view/homescreen/widgets/new_arival_widget.dart';
 import 'package:fine_gold_flutter/view/homescreen/widgets/prices_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../utils/app_constants.dart';
 import '../category/category_sub_page/category_products.dart';
@@ -87,12 +86,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-<<<<<<< Updated upstream
-                      // const AbsorbPointer(child: AutoScrollingPrices()),
-=======
-                   //   const AbsorbPointer(child: AutoScrollingPrices()),
->>>>>>> Stashed changes
-                      const SizedBox(height: 20,),
+
+
+
+                      AbsorbPointer(child: AutoScrollingPrices()),
+
+                       SizedBox(height: 20,),
 
                       Column(
                         children: [
