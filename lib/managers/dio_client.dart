@@ -7,8 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import '../utils/api_constants.dart';
 import '../utils/shared_pref_instance.dart';
-
-
 class DioClient {
   DioClient._privateConstructor();
   static final DioClient instance = DioClient._privateConstructor();
