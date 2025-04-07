@@ -29,8 +29,11 @@ class LivePriceViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void init() {
-   _startLivePriceUpdates();
+  // void init() {
+  //  _startLivePriceUpdates();
+  // }
+  void init(){
+
   }
 
 
